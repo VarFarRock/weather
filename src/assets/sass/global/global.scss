@@ -1,0 +1,31 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+.root{
+    margin: 0 auto;
+    max-width: 375px;
+    background: $background;
+    background: linear-gradient(0deg, rgba(32,194,137,1) 0%, rgba(18,53,61,1) 100%);
+    background-size: cover;
+}
+.h2{
+    color:$white;
+    font-family: $font;
+    font-weight: bold;
+    font-size: 18px;
+    line-height: 17px;
+}
+.h3{
+    color: $white;
+    font-family: $font;
+    line-height: 17px;
+    font-size: 17px;
+}
+.h4{
+    color: $blue;
+    font-family: $font;
+    line-height: 17px;
+    font-size: 17px;
+}

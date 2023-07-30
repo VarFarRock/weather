@@ -1,0 +1,29 @@
+.current{
+    &__img{
+        width: 52%;
+        padding: 0 0 20px 0;
+    }
+    &__info{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    &__temp{
+        display: flex;
+        justify-content: center;
+        position: relative;
+    }
+    &__description{
+        padding:  0 0 15px 0;
+    }
+    &__today{
+        font-size: 80px;
+        color: $white;
+    }
+    &__todayicon{
+        position: absolute;
+        width: 7em;
+        top: -10px;
+        left: 45px;
+    }
+}

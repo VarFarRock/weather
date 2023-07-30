@@ -1,0 +1,32 @@
+.weather{
+    &__container{
+        display: flex;
+        margin: 30px 10px 35px 10px
+    }
+    &__item{
+        position: relative;
+    }
+    &__item-box{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    &__miniiconsun{
+        position: absolute;
+        width: 70%;
+        top: 100px;
+        left: 28px;
+    }
+    &__miniiconmoon{
+        position: absolute;
+        width: 70%;
+        top: 81%;
+        left: 28px;
+    }
+    &__day{
+        margin:  10px 0 0 0;
+    }
+    &__max{
+        margin: 20px 0px 20px 0;
+    }
+}
