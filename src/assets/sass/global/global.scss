@@ -5,10 +5,13 @@
 }
 .root{
     margin: 0 auto;
-    max-width: 375px;
+    max-width: $tab;
     background: $background;
     background: linear-gradient(0deg, rgba(32,194,137,1) 0%, rgba(18,53,61,1) 100%);
     background-size: cover;
+    @media(min-width:$tab){
+        max-width: $XR;
+    }
 }
 .h2{
     color:$white;

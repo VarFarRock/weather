@@ -1,7 +1,14 @@
 .weather{
+    @media(max-width:$tablet){
+        margin-bottom: 25%;
+    }
     &__container{
         display: flex;
-        margin: 30px 10px 75px 10px
+        gap: 5%;
+        margin: 30px 10px 35px 10px;
+        @media (min-width:$XR) {
+            margin: 30px 10px 78px 10px;
+        }
     }
     &__item{
         position: relative;

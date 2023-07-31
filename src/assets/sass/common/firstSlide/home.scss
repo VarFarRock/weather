@@ -1,8 +1,14 @@
 .current{
-    margin-bottom: 70px;
+    @media(min-width:$XR){
+        margin: 12% 0px 12% 0px;
+    }
     &__img{
         width: 52%;
         padding: 0 0 20px 0;
+        @media (min-width:$XR) {
+            width: 80%;
+            padding:0px;
+        }
     }
     &__info{
         display: flex;
