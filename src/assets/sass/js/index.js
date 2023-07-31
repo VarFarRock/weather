@@ -5,7 +5,7 @@ let out = document.querySelector('.root')
 let template = '';
     function getpost(id){
         return new Promise((resolve, reject) => {
-            fetch('http://api.weatherapi.com/v1/forecast.json?key=6fd361ff5b1d426d843174843231307&q=Poltava&days=7')
+            fetch('https://api.weatherapi.com/v1/forecast.json?key=6fd361ff5b1d426d843174843231307&q=Poltava&days=7')
             .then(respons => respons.json())
             .then(data => resolve(data))
             .catch(err => reject(err))
