@@ -1,13 +1,7 @@
 .info{
     margin: 25px 25px 25px 35px;
-    @media (min-width:$XR) {
-        margin: 70px 25px 25px 35px;
-    }
     &__container{
         padding: 0 0 40px 0;
-        @media (min-width:$XR) {
-            padding: 0px 0 60px 0;
-        }
     }
     &__setrise{
         display: grid; 

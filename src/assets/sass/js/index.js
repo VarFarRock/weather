@@ -1,17 +1,17 @@
 
-
 document.addEventListener('DOMContentLoaded', function() {
 let out = document.querySelector('.root')
 let template = '';
-    function getpost(id){
-        return new Promise((resolve, reject) => {
-            fetch('https://api.weatherapi.com/v1/forecast.json?key=6fd361ff5b1d426d843174843231307&q=Poltava&days=7')
-            .then(respons => respons.json())
-            .then(data => resolve(data))
-            .catch(err => reject(err))
-        })
+let curentlocation = 'Poltava'
+    function weatherData(){
+        let url = `https://api.weatherapi.com/v1/forecast.json?key=6fd361ff5b1d426d843174843231307&q=${curentlocation}&days=7`;
+        let req = new Request(url)
+        fetch(req)
+        .then(res => res.json())
+        .then((res => data(res)))
+        .catch(err => console.error(err));
     }
-    getpost(1).then(data => {
+    function data(data){
         console.log(data);
         let daysOfWeek = ['Неділя', 'Понеділок', 'Вівторок', 'Середа', 'Четвер', 'Пятниця', 'Субота'];
         let months = ['Січень', 'Лютий', 'Березень', 'Квітень', 'Травень', 'Червень', 'Липень', 'Серпень', 'Вереснь', 'Жоветнь', 'Листопад', 'Грудень'];
@@ -77,11 +77,11 @@ let template = '';
         }
         const moonicon = {
             'Waxing Gibbous': './img/MoonPhases/moon-waxing-gibbous.svg',
-            '2': './img/MoonPhases/moon-waxing-crescent.svg',
-            '3': './img/MoonPhases/moon-waning-gibbous.svg',
-            '4': './img/MoonPhases/moon-waning-crescent.svg',
-            '5': './img/MoonPhases/moon-new.svg',
-            '6': './img/MoonPhases/moon-last-quarter.svg',
+            'Waxing Crescent': './img/MoonPhases/moon-waxing-crescent.svg',
+            'Waning Gibbous': './img/MoonPhases/moon-waning-gibbous.svg',
+            'Waning Crescent': './img/MoonPhases/moon-waning-crescent.svg',
+            'New Moon': './img/MoonPhases/moon-new.svg',
+            'Last Quarter': './img/MoonPhases/moon-last-quarter.svg',
             'Full Moon': './img/MoonPhases/moon-full.svg',
         }
         let moonicons = data.forecast.forecastday[0].astro.moon_phase
@@ -140,6 +140,10 @@ let template = '';
                                 <div class="hero__container">
                                     <div class="hero__currentdate h3">${dayOfWeek}, ${month}, ${currentDay}</div>
                                     <div class="hero__localtion h2">${city}, ${region} ${contry}</div>
+                                    <div class="hero__select">
+                                        <input type="text" class="hero__inp"></input>
+                                        <button class="hero__btn">Пошук</button>
+                                    </div>
                                 </div>
                             </div>
                         </header>
@@ -155,7 +159,6 @@ let template = '';
                                                     <div class="current__today">${currentWeatherData.temp}</div>
                                                     <img class="current__todayicon" src=${icontemp}>
                                                 </div>
-                                                
                                             </div>
                                         </div>
                                     </main>
@@ -267,8 +270,9 @@ let template = '';
                                 </div>
                                 <div class="swiper-slide">
                                     <div class="moon">
-                                        <div></div>
-                                        <img class=moon__icon src="${newmoon}">
+                                        <div>
+                                            <img class=moon__icon src="${newmoon}">
+                                        </div>
                                     </div>
                                 </div>
                             </div>    
@@ -282,8 +286,18 @@ let template = '';
               el: ".swiper-pagination",
             },
           });
-    });
-});
+          
+        document.querySelector('.hero__btn').addEventListener('click', () => {
+            let inp = document.querySelector('.hero__inp').value
+            curentlocation = inp
+            template = ''
+            weatherData()
+        })
+    };
+    weatherData() 
+})
+
+
    
 
 

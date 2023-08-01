@@ -9,6 +9,7 @@
     background: $background;
     background: linear-gradient(0deg, rgba(32,194,137,1) 0%, rgba(18,53,61,1) 100%);
     background-size: cover;
+    overflow: hidden;
     @media(min-width:$tab){
         max-width: $XR;
     }
@@ -31,4 +32,27 @@
     font-family: $font;
     line-height: 17px;
     font-size: 17px;
+}
+input{
+    color: $white;
+    font-weight: bold;
+    background: transparent;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    border-bottom: 1px solid rgb(17, 138, 97); 
+    outline: none; 
+}
+button{
+    padding: 2px 2px 2px 2px;
+    border-radius: 8%;
+    background: none;
+    outline: none; 
+    border: none;
+    border-radius: 2%;
+    background-color: $background;
+}
+:active, :hover, :focus {
+    outline: 0;
+    outline-offset: 0;
 }
