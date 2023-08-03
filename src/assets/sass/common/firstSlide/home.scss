@@ -3,6 +3,9 @@
         position: absolute;
         width: 52%;
         top:2%;
+        @media (min-width:$XR) {
+            width: 75%;
+        }
     }
     &__info{
         display: flex;
@@ -14,6 +17,9 @@
         justify-content: center;
         position: relative;
         margin: 44% 0 5% 0px;
+        @media (min-width:$XR) {
+            margin: 75% 0 5% 0px;
+        }
     }
     &__today{
         font-size: 80px;
