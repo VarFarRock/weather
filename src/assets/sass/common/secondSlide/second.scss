@@ -8,6 +8,12 @@
         grid-template-columns: 1fr 1fr 1fr; 
         align-items: center;
     }
+    &__setrise:not(:last-child){
+        @media (min-width:$XR) {
+            margin-bottom: 5%;
+        }
+       
+    }
     &__anim{
         width: 45%;
     }

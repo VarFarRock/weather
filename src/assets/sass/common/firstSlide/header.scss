@@ -1,4 +1,10 @@
 .hero{
+    @media(min-width:$XR) {
+        margin-top: 50px;
+    }
+    @media (max-width:$tablet) {
+        margin-top: 40px;
+    }
     &__container{
         display: flex;
         justify-content: center;

@@ -15,12 +15,14 @@ let curentlocation = 'Poltava'
         console.log(data);
         let daysOfWeek = ['Неділя', 'Понеділок', 'Вівторок', 'Середа', 'Четвер', 'Пятниця', 'Субота'];
         let months = ['Січень', 'Лютий', 'Березень', 'Квітень', 'Травень', 'Червень', 'Липень', 'Серпень', 'Вереснь', 'Жоветнь', 'Листопад', 'Грудень'];
+        //функция для замены даты в формате ММ/ЧЧ/ГГГГ на сокращеное название дня недели//
         function getDayOfWeeks(dateString) {
             const daysOfWeekShort = ['Вс','Пн','Вт','Ср','Чт','Пт','Сб'];
             const date = new Date(dateString);
             const dayIndex = date.getDay();
             return daysOfWeekShort[dayIndex];
         }
+        //перевод текущего времени в epoch и перебор для вывда времени//
         let arr = [];
         const currentEpochTime = Math.floor(Date.now() / 1000);
         const test = data.forecast.forecastday
@@ -32,6 +34,7 @@ let curentlocation = 'Poltava'
                 }
             }
         }
+        //тут перебираем уже новый массив и с условием вывод не больше 5//
         const currentdaytime = []
         const times = []
         for(let i = 0; i <= 5;i++){
@@ -45,6 +48,7 @@ let curentlocation = 'Poltava'
             }
             
         }
+        //end//
         const weatherimgday = {
             '1000': './img/day/clear-day.svg',
             '1003': './img/day/partly-cloudy-day.svg',
@@ -84,14 +88,29 @@ let curentlocation = 'Poltava'
             'Last Quarter': './img/MoonPhases/moon-last-quarter.svg',
             'Full Moon': './img/MoonPhases/moon-full.svg',
         }
+        const descriptionmoon = {
+            'Waxing Gibbous': 'Спадаючий місяць',
+            'Waxing Crescent': 'Місяць зростаючий півмісяць',
+            'Waning Gibbous': 'Місяць спадаючий',
+            'Waning Crescent': 'Місяць убуваючий півмісяць',
+            'New Moon': 'Новий місяць',
+            'Last Quarter': 'Остання чверть місяця',
+            'Full Moon' : 'Повний місяць',
+        }
+        // вывод значний луны и замена иконок//
         let moonicons = data.forecast.forecastday[0].astro.moon_phase
-        let cloud = data.current.cloud
         let newmoon = moonicon[moonicons]
+        let destexmoon = descriptionmoon[moonicons]
+        //end//
+        //вывод день/ночь/температура/облако/
+        let cloud = data.current.cloud
         let codeOldimg = data.current.condition.code
         let day = weatherimgday[codeOldimg]
         let night = weatherimgnight[codeOldimg]
         let sun = icontempgradus[1]
         let moon = icontempgradus[2]
+        //end//
+        // перебор для вывода почасового прогноза//
             let datehour = new Date();
             const hours = datehour.getHours()
             if(hours < 21 || hours < 6){
@@ -107,6 +126,8 @@ let curentlocation = 'Poltava'
             contry = data[key].country            
             break
         }
+        //end//
+                //вовращаем новый массив для удобного перебора значений//
                 const forecastData = data.forecast.forecastday.map(forecast => ({
                     curdays: forecast.date,
                     icon: forecast.day.condition.icon,
@@ -122,6 +143,7 @@ let curentlocation = 'Poltava'
                   }));
                   let n = getDayOfWeeks(forecastData[1].curdays)
                   let y = getDayOfWeeks(forecastData[2].curdays)
+                  //обьект с выводом текущего прогноза//
                     const currentWeatherData = {
                     icon :data.current.condition.icon,
                     text :data.current.condition.text,
@@ -134,6 +156,7 @@ let curentlocation = 'Poltava'
                         let dayOfWeek = daysOfWeek[dayIndex];//полные название дней
                         let month = months[monthIndex];//название месяца
                         let currentDay = date.getDate();//текущий день   
+                        //шаблон погоды//
                         template += `
                         <header class="header">
                             <div class="hero">
@@ -270,8 +293,9 @@ let curentlocation = 'Poltava'
                                 </div>
                                 <div class="swiper-slide">
                                     <div class="moon">
-                                        <div>
+                                        <div class="moon__container">
                                             <img class=moon__icon src="${newmoon}">
+                                            <div class="moon__des h4">${destexmoon}</div>
                                         </div>
                                     </div>
                                 </div>
@@ -286,12 +310,16 @@ let curentlocation = 'Poltava'
               el: ".swiper-pagination",
             },
           });
-          
+          //строчка поиска//
         document.querySelector('.hero__btn').addEventListener('click', () => {
             let inp = document.querySelector('.hero__inp').value
-            curentlocation = inp
-            template = ''
-            weatherData()
+            if(inp == '' || inp == undefined || inp == NaN){
+                alert('erorr')
+            }else{
+                curentlocation = inp
+                template = ''
+                weatherData()
+            }
         })
     };
     weatherData() 
