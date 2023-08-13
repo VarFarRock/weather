@@ -51,6 +51,7 @@ button{
     border: none;
     border-radius: 2%;
     background-color: $background;
+    cursor: pointer;
 }
 :active, :hover, :focus {
     outline: 0;

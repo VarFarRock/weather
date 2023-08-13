@@ -1,19 +1,25 @@
-
 document.addEventListener('DOMContentLoaded', function() {
 let out = document.querySelector('.root')
 let template = '';
-let curentlocation = 'Poltava'
     function weatherData(){
-        let url = `https://api.weatherapi.com/v1/forecast.json?key=6fd361ff5b1d426d843174843231307&q=${curentlocation}&days=7`;
-        let req = new Request(url)
-        fetch(req)
-        .then(res => res.json())
-        .then((res => data(res)))
-        .catch(err => console.error(err));
+        if('geolocation' in navigator){
+            navigator.geolocation.getCurrentPosition(function(position){
+                let lat = position.coords.latitude.toFixed(4);
+                let lon = position.coords.longitude.toFixed(4);
+                console.log(lat,lon);
+                let curentlocation = 'Полтава'
+                let url = `https://api.weatherapi.com/v1/forecast.json?key=6fd361ff5b1d426d843174843231307&q=${lat},${lon}&days=7&lang=uk&alerts=yes`;
+                let req = new Request(url)
+                fetch(req)
+                .then(res => res.json())
+                .then((res => data(res)))
+                .catch(err => console.error(err));
+            })
+        }
     }
     function data(data){
         console.log(data);
-        let daysOfWeek = ['Неділя', 'Понеділок', 'Вівторок', 'Середа', 'Четверг', 'Пятниця', 'Субота'];
+        let daysOfWeek = ['Неділя', 'Понеділок', 'Вівторок', 'Середа', 'Четвер', 'Пятниця', 'Субота'];
         let months = ['Січень', 'Лютий', 'Березень', 'Квітень', 'Травень', 'Червень', 'Липень', 'Серпень', 'Вереснь', 'Жоветнь', 'Листопад', 'Грудень'];
         //функция для замены даты в формате ММ/ЧЧ/ГГГГ на сокращеное название дня недели//
         function getDayOfWeeks(dateString) {
@@ -218,37 +224,37 @@ let curentlocation = 'Poltava'
                                         <div class="info">
                                             <ul class="info__container">
                                                 <li class="info__setrise">
-                                                    <span class="info__text h3">Moonrise</span>
+                                                    <span class="info__text h3">Схід місяця</span>
                                                     <span class="info__meaning h3">${forecastData[0].moonrise}</span>
                                                     <img  class="info__anim" src="./img/riseset/night/moonrise.svg">
                                                 </li>
                                                 <li class="info__setrise">
-                                                    <span class="info__text h3">Moonset</span>
+                                                    <span class="info__text h3">Захід місяця</span>
                                                     <span class="info__meaning h3">${forecastData[0].moonset}</span>
                                                     <img class="info__anim" src="./img/riseset/night/moonset.svg">
                                                 </li>
                                                 <li class="info__setrise">
-                                                    <span class="info__text h3">Sunrise</span>
+                                                    <span class="info__text h3">Схід сонця</span>
                                                     <span class="info__meaning h3">${forecastData[0].sunrise}</span>
                                                     <img class="info__anim" src="./img/riseset/day/sunrise.svg">
                                                 </li>
                                                 <li class="info__setrise">
-                                                    <span class="info__text h3">Sunset</span>
+                                                    <span class="info__text h3">Захід сонця</span>
                                                     <span class="info__meaning h3">${forecastData[0].sunset}</span>
                                                     <img class="info__anim" src="./img/riseset/day/sunset.svg">
                                                 </li>
                                                 <li class="info__setrise">
-                                                    <div class="info__text h3">Avg</div>
+                                                    <div class="info__text h3">Індекс якості повітря</div>
                                                     <div class="info__meaning h3">${forecastData[0].avghumidity}%</div>
                                                     <img class="info__anim" src="./img/tempanim/humidity.svg">
                                                 </li>
                                                 <li class="info__setrise">
-                                                    <div class="info__text h3">Uv</div>
+                                                    <div class="info__text h3">Ультрафіолетове випромінювання</div>
                                                     <div class="info__meaning h3">${forecastData[0].uv}</div>
                                                 </li>
                                                 <li class="info__setrise">
-                                                    <div class="info__text h3">Cloud</div>
-                                                    <div class="info__meaning h3">${cloud}</div>
+                                                    <div class="info__text h3">Хмарність</div>
+                                                    <div class="info__meaning h3">${cloud}%</div>
                                                     <img class="info__anim" src="./img/day/cloudy.svg">
                                                 </li>
                                             </ul>
@@ -308,6 +314,7 @@ let curentlocation = 'Poltava'
         new Swiper(".mySwiper", {
             pagination: {
               el: ".swiper-pagination",
+              clickable: true,
             },
           });
           //строчка поиска//
@@ -324,8 +331,3 @@ let curentlocation = 'Poltava'
     };
     weatherData() 
 })
-
-
-   
-
-

@@ -5,7 +5,7 @@
     }
     &__setrise{
         display: grid; 
-        grid-template-columns: 1fr 1fr 1fr; 
+        grid-template-columns: 2fr 1fr 1fr; 
         align-items: center;
     }
     &__setrise:not(:last-child){
@@ -19,7 +19,7 @@
     }
     &__next{
         display: flex;
-        justify-content: center;
+        justify-content: space-between;
     }
     &__box{
         display: flex;
