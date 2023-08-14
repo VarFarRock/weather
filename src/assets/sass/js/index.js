@@ -6,8 +6,6 @@ let template = '';
             navigator.geolocation.getCurrentPosition(function(position){
                 let lat = position.coords.latitude.toFixed(4);
                 let lon = position.coords.longitude.toFixed(4);
-                console.log(lat,lon);
-                let curentlocation = 'Полтава'
                 let url = `https://api.weatherapi.com/v1/forecast.json?key=6fd361ff5b1d426d843174843231307&q=${lat},${lon}&days=7&lang=uk&alerts=yes`;
                 let req = new Request(url)
                 fetch(req)
